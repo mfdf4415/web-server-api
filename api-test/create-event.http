@@ -1,0 +1,11 @@
+POST http://localhost:8080/events
+content-type: application/json
+
+{
+    "name": "hiiii lachooo",
+    "description": "test event Chapal gian for two",
+    "location": "germany",
+    "date": "2027-05-12T17:45:00.000Z"
+}
+
+
