@@ -61,9 +61,15 @@ func updateEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "cannot convert to int"})
 		return
 	}
-	_, err = models.GetEventById(int(eventId))
+	event, err := models.GetEventById(int(eventId))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "cannt get event"})
+		return
+	}
+	userId := c.GetInt64("userId")
+
+	if event.UserId != userId {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "not auth for up to date"})
 		return
 	}
 
@@ -94,6 +100,11 @@ func deleteEvent(c *gin.Context) {
 	event, err := models.GetEventById(int(eventId))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "cannt get event"})
+		return
+	}
+	userId := c.GetInt64("userId")
+	if event.UserId != userId {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "not auth for delete"})
 		return
 	}
 
