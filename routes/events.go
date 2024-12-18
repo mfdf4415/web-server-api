@@ -5,7 +5,6 @@ import (
 	"strconv"
 
 	"example.com/rest-api/models"
-	"example.com/rest-api/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -36,29 +35,14 @@ func getEvents(c *gin.Context) {
 }
 
 func createEvent(c *gin.Context) {
-	token := c.Request.Header.Get("Authorization")
-	if token == "" {
-		c.JSON(http.StatusUnauthorized, gin.H{"message": "not authrization"})
-		return
-	}
-	
-	userId,err := utils.VerifyToken(token)
-	if err != nil {
-		if token == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{"message": "invalid token"})
-			return
-		}
-	}
-
 	var event models.Event
-	err = c.ShouldBindJSON(&event)
+	err := c.ShouldBindJSON(&event)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": err})
 		return
 	}
-
-
+	userId := c.GetInt64("userId")
 	event.UserId = userId
 
 	err = event.Save()
