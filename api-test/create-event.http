@@ -1,8 +1,9 @@
 POST http://localhost:8080/events
 content-type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJleHAiOjE3MzQ1MjUyOTMsInVzZXJJZCI6MX0.55M8mc5azEF4nf2Dd6H4Vrx6s42YAZiFKna8xkYcA0E
 
 {
-    "name": "hiiii lachooo",
+    "name": "user defrent hiiidfgdfgdfgi lachooo akhhhhhhhh",
     "description": "test event Chapal gian for two",
     "location": "germany",
     "date": "2027-05-12T17:45:00.000Z"
